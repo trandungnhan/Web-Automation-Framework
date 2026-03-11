@@ -1,9 +1,0 @@
-<suite name="TodoMVC">
-    <test name="Test TodoMVC on chrome">
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="todo.TodoTest"></class>
-            <class name="calculator.BodyMassIndexTest"></class>
-        </classes>
-    </test>
-</suite>

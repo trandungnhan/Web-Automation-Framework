@@ -2,14 +2,14 @@ package MarsAir.tests;
 
 import MarsAir.pages.SearchPage;
 import MarsAir.utils.ConfigReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import java.time.Duration;
+
 
 public class BaseTest {
 
@@ -20,10 +20,17 @@ public class BaseTest {
     void setUp() {
         String browserType = ConfigReader.getProperty("browser");
         if (browserType.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        } else if(browserType.equalsIgnoreCase("edge")){
-            WebDriverManager.edgedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--disable-search-engine-choice-screen");
+
+            if (System.getProperty("headless", "false").equals("true")) {
+                options.addArguments("--headless=new");
+            }
+
+            driver = new ChromeDriver(options);
+
+        } else if (browserType.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
         } else {
             throw new RuntimeException("Unsupported browser type: '" + browserType + "'. Please check your config.properties file.");

@@ -1,0 +1,1 @@
+{"uuid":"4b1d7452-90b4-41ee-a0b0-0af971bb2fff","name":"MarsAir.tests.BaseTest.setUp","children":["4c900233-2d2e-4586-a557-7bb3f5eb0927"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1773135112340,"stop":1773135142922}],"afters":[],"start":1773135112340,"stop":1773135142923}
