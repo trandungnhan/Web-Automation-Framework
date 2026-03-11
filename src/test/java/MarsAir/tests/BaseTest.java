@@ -26,6 +26,9 @@ public class BaseTest {
 
             if (System.getProperty("headless", "false").equals("true")) {
                 options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--window-size=1920,1080");
             }
 
             driver = new ChromeDriver(options);
