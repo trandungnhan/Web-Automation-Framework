@@ -22,7 +22,7 @@ public class BaseTest {
         if (browserType.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--disable-search-engine-choice-screen");
+            //options.addArguments("--disable-search-engine-choice-screen");
 
             if (System.getProperty("headless", "false").equals("true")) {
                 options.addArguments("--headless=new");
