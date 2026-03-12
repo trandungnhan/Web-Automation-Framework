@@ -1,3 +1,5 @@
 /target/
 /src/.idea/
 /.idea/
+/allure-results/
+/allure-report/
