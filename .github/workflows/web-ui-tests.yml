@@ -1,5 +1,11 @@
 name: Web UI Automation CI
 on: [push]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   webui-test-job:
     runs-on: ubuntu-latest
@@ -10,5 +16,33 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Run Web UI Tests
+        cache: maven
+
+    - name: Setup Chrome
+      uses: browser-actions/setup-chrome@v1
+
+    - name: Run UI Tests
       run: mvn test -Dtest=SearchFlightTests -Dheadless=true
+      continue-on-error: true
+
+    - name: Generate Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 20
+
+    - name: Deploy Allure Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-report
+        force_orphan: true
+
+
+
+

@@ -38,7 +38,10 @@ public class BaseTest {
         } else {
             throw new RuntimeException("Unsupported browser type: '" + browserType + "'. Please check your config.properties file.");
         }
-        driver.manage().window().maximize();
+
+        if (!System.getProperty("headless", "false").equals("true")){
+            driver.manage().window().maximize();
+        }
         driver.get(ConfigReader.getProperty("url"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         searchPage = new SearchPage(driver);
